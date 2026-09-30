@@ -22,6 +22,20 @@ We plan to complete the main analysis over eight weeks, followed by preparation 
 
 Potential challenges include missing data, unequal numbers of delayed and non-delayed flights, and changes in flight patterns across years. Flights during the COVID-19 pandemic may differ from those in later years, which could affect predictions on the test set. Historical climate summaries also cannot capture unexpected weather events. We will consider these limitations when interpreting model performance and discussing how useful the predictions may be for passengers.
 
+## 3. Project Goals
+
+The primary goal of this project is to develop a binary classification model that predicts whether a domestic flight departing from Boston Logan International Airport (BOS) will arrive at its destination at least 15 minutes late, using only information that would reasonably be available at booking time.
+
+Specifically, we aim to:
+
+1. Predict flight delays: Use airline, destination, scheduled departure time, day of week, month, flight distance, and historical climate information to predict the `ArrDel15` label.
+
+2. Compare prediction methods: Train and compare multiple classification methods, initially including logistic regression and decision trees, to determine how different modeling approaches perform on the flight-delay prediction task.
+
+3. Evaluate predictive performance: Evaluate the models on held-out future flight data using metrics such as precision, recall, F1-score, ROC-AUC, and accuracy. Because delayed and non-delayed flights may not occur equally often, we will pay particular attention to F1-score and ROC-AUC rather than relying only on accuracy.
+
+4. Identify important predictors: Examine which booking-time features are most strongly associated with flight delays and analyze situations in which the models make incorrect predictions.
+
 ## 4. Data Collection Plan 
 
 We plan to use the U.S. Department of Transportation’s Bureau of Transportation Statistics (BTS) “Reporting Carrier On-Time Performance” dataset for domestic flights departing from Boston Logan International Airport. We will collect records from 2020–2025 for model training and validation and January–July 2026 for testing. The dataset includes flight dates, airlines, destinations, scheduled and actual times, flight distance, arrival delays, cancellation indicators, and diversion indicators.
