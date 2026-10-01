@@ -24,17 +24,21 @@ Potential challenges include missing data, unequal numbers of delayed and non-de
 
 ## 3. Project Goals
 
-The primary goal of this project is to develop a binary classification model that predicts whether a domestic flight departing from Logan Airport will arrive at its destination at least 15 minutes late or cancelled, using only information that would reasonably be available at booking time.
+3.1 Research Question
+
+Can information available at booking time, including airline, destination, scheduled departure date and time, day of the week, flight distance, and historical weather summaries for Boston Logan International Airport, be used to predict whether a domestic flight departing from BOS will arrive at least 15 minutes late?
+
+3.2 Specific and Measurable Objectives
 
 Specifically, we aim to:
 
-1. Predict flight delays: Use airline, destination, scheduled departure time, day of week, month, flight distance, and historical climate information to predict the `ArrDel15` label.
+1. Develop classification models to predict whether a domestic flight departing from BOS will arrive at least 15 minutes late using information available at booking time.
 
-2. Compare prediction methods: Train and compare multiple classification methods, initially including logistic regression and decision trees, to determine how different modeling approaches perform on the flight-delay prediction task.
+2. Compare logistic regression and decision tree models and evaluate their predictive performance using model evaluation methods covered in the course.
 
-3. Evaluate predictive performance: Evaluate the models on held-out future flight data using metrics such as precision, recall, F1-score, ROC-AUC, and accuracy. Because delayed and non-delayed flights may not occur equally often, we will pay particular attention to F1-score and ROC-AUC rather than relying only on accuracy.
+3. Evaluate whether historical weather summaries provide additional predictive value when added to flight and calendar features.
 
-4. Identify important predictors: Examine which booking-time features are most strongly associated with flight delays and analyze situations in which the models make incorrect predictions.
+4. Test the models on chronologically later flight data and examine prediction errors across airlines, destinations, months, and scheduled departure times.
 
 ## 4. Data Collection Plan 
 ### 4.1 BTS Flight data
