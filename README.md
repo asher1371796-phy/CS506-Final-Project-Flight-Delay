@@ -37,7 +37,7 @@ Specifically, we aim to:
 4. Identify important predictors: Examine which booking-time features are most strongly associated with flight delays and analyze situations in which the models make incorrect predictions.
 
 ## 4. Data Collection Plan 
-###4.1 BTS Flight data
+### 4.1 BTS Flight data
 We plan to use the U.S. Department of Transportation’s Bureau of Transportation Statistics (BTS) “Reporting Carrier On-Time Performance” dataset for domestic flights departing from Boston Logan International Airport. We will collect records from 2020–2025 for model training and validation and January–July 2026 for testing. The dataset includes flight dates, airlines, destinations, scheduled and actual times, flight distance, arrival delays, cancellation indicators, and diversion indicators.
 
 We will download monthly CSV files, combine them using Python, and filter for flights with Boston Logan (BOS) as the origin airport. We will retain scheduled flight information for input features and use `ArrDel15` and `Cancelled` as labels for the separate delay and cancellation prediction tasks. Actual times and other information unavailable at booking will not be used as input features.
