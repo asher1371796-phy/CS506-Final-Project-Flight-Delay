@@ -45,7 +45,7 @@ Specifically, we aim to:
 We plan to use the U.S. Department of Transportation’s Bureau of Transportation Statistics (BTS) “Reporting Carrier On-Time Performance” dataset for domestic flights departing from Boston Logan International Airport. We will collect records from 2020–2025 for model training and validation and January–July 2026 for testing. The dataset includes flight dates, airlines, destinations, scheduled and actual times, flight distance, arrival delays, cancellation indicators, and diversion indicators.
 
 We will download monthly CSV files, combine them using Python, and filter for flights with Boston Logan (BOS) as the origin airport. We will retain scheduled flight information for input features and use `ArrDel15` and `Cancelled` as labels for the separate delay and cancellation prediction tasks. Actual times and other information unavailable at booking will not be used as input features.
-Data source: [BTS Reporting Carrier On-Time Performance — Field Definitions]
+Data source: [BTS Flight Data][https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ]
 
 The prediction target is whether a flight arrives at least 15 minutes late or cancel. We will use the BTS  “ArrDel1” and “Cancelled” indicator as two binary labels. For the delay label, 1 indicates an arrival delay of at least 15 minutes, 0 indicates a delay of less than 15 minutes, including early arrivals, and cancelled flights will be marked as missing. For the cancelation label, 1 indicates a cancel flight and 0 indicates a not cancel flight including both on time and delay flights. Flights with missing target labels will be excluded during cleaning. 
 
@@ -55,7 +55,7 @@ We plan to obtain historical weather observations for Boston Logan International
 Because our goal is to predict flight delays at booking time, we will use these observations to construct historical weather summaries by month and hour of day, rather than use actual weather on the flight date. These summaries may include average temperature, average wind speed, and the frequency of low-visibility conditions. We will match them to flights using the scheduled departure month and departure hour. We will match climate data from 2020–2024 with corresponding flight information in the train set to link weather conditions to flight delays and generate feature values, while also using weather data from 2000–2024 to forecast the weather for future flight dates.
 
 We will initially exclude destination-airport and en-route weather to keep the project manageable. The historical summaries represent typical weather patterns and cannot capture unexpected conditions on a particular flight date.
-Data source: IEM ASOS/AWOS Weather Data Download
+Data source: [IEM Weather Data][https://mesonet.agron.iastate.edu/request/download.phtml?network=MA_ASOS]
 
 ### Data Cleaning & Preparation
 We will remove duplicate records and prepare separate datasets for delay and cancellation prediction. For delay prediction, we will exclude canceled and diverted flights and records with missing arrival-delay labels. For cancellation prediction, we will retain canceled and non-canceled flights with valid cancellation labels. We will handle missing input values, convert dates and scheduled times into usable features, and encode categorical variables. Preprocessing will be fitted on the training set and applied to the validation and test sets. 
