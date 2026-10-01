@@ -10,7 +10,7 @@ Zhen Zheng
 
 ## 2. Project Description
 
-Air travel is typically used for journeys or missions where timeliness is critical; consequently, delays or cancellations often entail significant costs. This project will investigate whether information available at booking time can be used to predict if a domestic flight departing from Boston Logan International Airport will arrive late. By comparing several prediction methods and examining when errors occur, we aim to provide passengers with data-driven, booking time on-time performance predictions, enabling them to plan their onward travel accordingly and minimize potential disruptions. Given the multitude of factors contributing to flight delays, our initial efforts will focus on flight route information such as destination, departure time and historical climate conditions at Boston Logan International Airport (BOS). Subsequently, we will evaluate the model's predictive performance and consider incorporating additional influencing factors in later stage of the project.
+Air travel is typically used for journeys or missions where timeliness is critical; consequently, delays or cancellations often entail significant costs. This project will investigate whether information available at booking time can be used to predict if a flight departing from Boston Logan International Airport will arrive late. By comparing several prediction methods and examining when errors occur, we aim to provide passengers with data-driven, booking time on-time performance predictions, enabling them to plan their onward travel accordingly and minimize potential disruptions. Given the multitude of factors contributing to flight delays, our initial efforts will focus on flight route information such as destination, departure time and historical climate conditions at Boston Logan International Airport (BOS). Subsequently, we will evaluate the model's predictive performance and consider incorporating additional influencing factors in later stage of the project.
 
 We plan to complete the main analysis over eight weeks, followed by preparation of the final report and presentation.
 
@@ -24,11 +24,11 @@ Potential challenges include missing data, unequal numbers of delayed and non-de
 
 ## 3. Project Goals
 
-3.1 Research Question
+### 3.1 Research Question
 
-Can information available at booking time, including airline, destination, scheduled departure date and time, day of the week, flight distance, and historical weather summaries for Boston Logan International Airport, be used to predict whether a domestic flight departing from BOS will arrive at least 15 minutes late?
+Can information available at booking time, including airline, destination, scheduled departure date and time, day of the week, flight distance, and historical weather summaries for Boston Logan International Airport, be used to predict whether a flight departing from BOS will arrive at least 15 minutes late or cancelled?
 
-3.2 Specific and Measurable Objectives
+### 3.2 Specific and Measurable Objectives
 
 Specifically, we aim to:
 
@@ -42,7 +42,7 @@ Specifically, we aim to:
 
 ## 4. Data Collection Plan 
 ### 4.1 BTS Flight data
-We plan to use the U.S. Department of Transportation’s Bureau of Transportation Statistics (BTS) “Reporting Carrier On-Time Performance” dataset for domestic flights departing from Boston Logan International Airport. We will collect records from 2020–2025 for model training and validation and January–July 2026 for testing. The dataset includes flight dates, airlines, destinations, scheduled and actual times, flight distance, arrival delays, cancellation indicators, and diversion indicators.
+We plan to use the U.S. Department of Transportation’s Bureau of Transportation Statistics (BTS) “Reporting Carrier On-Time Performance” dataset for flights departing from Boston Logan International Airport. We will collect records from 2020–2025 for model training and validation and January–July 2026 for testing. The dataset includes flight dates, airlines, destinations, scheduled and actual times, flight distance, arrival delays, cancellation indicators, and diversion indicators.
 
 We will download monthly CSV files, combine them using Python, and filter for flights with Boston Logan (BOS) as the origin airport. We will retain scheduled flight information for input features and use `ArrDel15` and `Cancelled` as labels for the separate delay and cancellation prediction tasks. Actual times and other information unavailable at booking will not be used as input features.
 Data source: [BTS Flight Data](https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ)
@@ -57,7 +57,7 @@ Because our goal is to predict flight delays at booking time, we will use these 
 We will initially exclude destination-airport and en-route weather to keep the project manageable. The historical summaries represent typical weather patterns and cannot capture unexpected conditions on a particular flight date.
 Data source: [IEM Weather Data](https://mesonet.agron.iastate.edu/request/download.phtml?network=MA_ASOS)
 
-### Data Cleaning & Preparation
+### 4.3 Data Cleaning & Preparation
 We will remove duplicate records and prepare separate datasets for delay and cancellation prediction. For delay prediction, we will exclude canceled and diverted flights and records with missing arrival-delay labels. For cancellation prediction, we will retain canceled and non-canceled flights with valid cancellation labels. We will handle missing input values, convert dates and scheduled times into usable features, and encode categorical variables. Preprocessing will be fitted on the training set and applied to the validation and test sets. 
 
 The input features will consist only of information that would be available at booking time. These features will include:
