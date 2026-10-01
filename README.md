@@ -32,7 +32,7 @@ Can information available at booking time, including airline, destination, sched
 
 Specifically, we aim to:
 
-1. Develop classification models to predict whether a domestic flight departing from BOS will arrive at least 15 minutes late using information available at booking time.
+1. Develop classification models to predict whether a flight departing from BOS will arrive at least 15 minutes late using information available at booking time.
 
 2. Compare logistic regression and decision tree models and evaluate their predictive performance using model evaluation methods covered in the course.
 
