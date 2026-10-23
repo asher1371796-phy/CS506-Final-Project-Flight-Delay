@@ -1,0 +1,15 @@
+Item,Count
+Months,55
+AllFlights,647451
+FlightDuplicatesBeforeAddingID,0
+DelayValidFlights,142664
+CancellationValidFlights,14576
+CancelledFlights,14576
+DivertedFlights,1749
+MissingArrivalLabel,16325
+WeatherRaw,40057
+WeatherClean,40043
+WeatherDuplicateTimesBeforeCleaning,14
+WeatherDuplicateTimesAfterCleaning,0
+ActualWeatherFlights,563342
+ActualWeatherUnmatched,72
