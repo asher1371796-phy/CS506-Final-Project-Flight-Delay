@@ -69,9 +69,9 @@ The input features will consist only of information that would be available at b
  - Flight distance
  - Historical climate information at Boston Logan International Airport, such as typical temperature, wind, and cloud conditions for the corresponding time of year and hour
 
-##Current Progress — October 23, 2026
+## Current Progress — October 23, 2026
 
-###Data Collection
+### Data Collection
 
  - Downloaded 55 monthly BTS Reporting Carrier On-Time Performance files covering January 2022 through July 2026.
  - Downloaded routine weather observations for Boston Logan Airport from the Iowa Environmental Mesonet for the same period.
