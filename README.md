@@ -42,17 +42,17 @@ Specifically, we aim to:
 
 ## 4. Data Collection Plan 
 ### 4.1 BTS Flight data
-We plan to use the U.S. Department of Transportation’s Bureau of Transportation Statistics (BTS) “Reporting Carrier On-Time Performance” dataset for flights departing from Boston Logan International Airport. We will collect records from 2020–2025 for model training and validation and January–July 2026 for testing. The dataset includes flight dates, airlines, destinations, scheduled and actual times, flight distance, arrival delays, cancellation indicators, and diversion indicators.
+We plan to use the U.S. Department of Transportation’s Bureau of Transportation Statistics (BTS) “Reporting Carrier On-Time Performance” dataset for flights departing from Boston Logan International Airport. We will collect records from 2022–2025 for model training and validation and January–July 2026 for testing. The dataset includes flight dates, airlines, destinations, scheduled and actual times, flight distance, arrival delays, cancellation indicators, and diversion indicators.
 
 We will download monthly CSV files, combine them using Python, and filter for flights with Boston Logan (BOS) as the origin airport. We will retain scheduled flight information for input features and use `ArrDel15` and `Cancelled` as labels for the separate delay and cancellation prediction tasks. Actual times and other information unavailable at booking will not be used as input features.
 Data source: [BTS Flight Data](https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ)
 
-The prediction target is whether a flight arrives at least 15 minutes late or cancel. We will use the BTS  “ArrDel1” and “Cancelled” indicator as two binary labels. For the delay label, 1 indicates an arrival delay of at least 15 minutes, 0 indicates a delay of less than 15 minutes, including early arrivals, and cancelled flights will be marked as missing. For the cancelation label, 1 indicates a cancel flight and 0 indicates a not cancel flight including both on time and delay flights. Flights with missing target labels will be excluded during cleaning. 
+The prediction target is whether a flight arrives at least 15 minutes late or cancel. We will use the BTS  “ArrDel15” and “Cancelled” indicator as two binary labels. For the delay label, 1 indicates an arrival delay of at least 15 minutes, 0 indicates a delay of less than 15 minutes, including early arrivals, and cancelled flights will be marked as missing. For the cancelation label, 1 indicates a cancel flight and 0 indicates a not cancel flight including both on time and delay flights. Flights with missing target labels will be excluded during cleaning. 
 
 ### 4.2 Historical Weather data
-We plan to obtain historical weather observations for Boston Logan International Airport from January 1, 2020, through December 31, 2025, using the Iowa Environmental Mesonet (IEM) ASOS/AWOS archive. We will select the BOS station, listed as BOSTON/LOGAN INTL in the Massachusetts ASOS network, and download routine hourly reports in CSV format. Candidate variables include temperature, wind speed, visibility, and cloud cover. We will check missing values and field availability before selecting the final weather variables.
+We plan to obtain historical weather observations for Boston Logan International Airport from January 1, 2022, through July 30, 2026, using the Iowa Environmental Mesonet (IEM) ASOS/AWOS archive. We will select the BOS station, listed as BOSTON/LOGAN INTL in the Massachusetts ASOS network, and download routine hourly reports in CSV format. Candidate variables include temperature, wind speed, visibility, and cloud cover. We will check missing values and field availability before selecting the final weather variables.
 
-Because our goal is to predict flight delays at booking time, we will use these observations to construct historical weather summaries by month and hour of day, rather than use actual weather on the flight date. These summaries may include average temperature, average wind speed, and the frequency of low-visibility conditions. We will match them to flights using the scheduled departure month and departure hour. We will match climate data from 2020–2024 with corresponding flight information in the train set to link weather conditions to flight delays and generate feature values, while also using weather data from 2000–2024 to forecast the weather for future flight dates.
+Because our goal is to predict flight delays at booking time, we will use these observations to construct historical weather summaries by month and hour of day, rather than use actual weather on the flight date. These summaries may include average temperature, average wind speed, and the frequency of low-visibility conditions. We will match them to flights using the scheduled departure month and departure hour. We will match climate data from 2022–2025 with corresponding flight information in the train set to link weather conditions to flight delays and generate feature values to forecast the weather for future flight dates.
 
 We will initially exclude destination-airport and en-route weather to keep the project manageable. The historical summaries represent typical weather patterns and cannot capture unexpected conditions on a particular flight date.
 Data source: [IEM Weather Data](https://mesonet.agron.iastate.edu/request/download.phtml?network=MA_ASOS)
@@ -68,3 +68,13 @@ The input features will consist only of information that would be available at b
  - Day of the week
  - Flight distance
  - Historical climate information at Boston Logan International Airport, such as typical temperature, wind, and cloud conditions for the corresponding time of year and hour
+
+##Current Progress — October 23, 2026
+
+###Data Collection
+
+ - Downloaded 55 monthly BTS Reporting Carrier On-Time Performance files covering January 2022 through July 2026.
+ - Downloaded routine weather observations for Boston Logan Airport from the Iowa Environmental Mesonet for the same period.
+ - Collected temperature, relative humidity, wind speed, wind gust, visibility, and cloud-cover variables.
+ - Preserved the downloaded files as raw data. The data collection notebook documents the download procedure.
+
