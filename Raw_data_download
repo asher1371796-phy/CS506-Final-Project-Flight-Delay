@@ -1,0 +1,90 @@
+from pathlib import Path
+# urlretrieve: download tool
+from urllib.request import urlretrieve
+
+# Set location and creat folder for raw data
+save_folder = Path(r"C:\Users\mengk\OneDrive\文档\大四\CS 506\Final Project\data\raw data")
+save_folder.mkdir(parents=True, exist_ok=True)
+
+
+###################################################################################
+### Flight data download from BTS (Bureau of Transportation Statistics) website
+######################################################################################
+
+## Set the base URL and construct the download URL for the specific year and month
+base_url = "https://transtats.bts.gov/PREZIP/"
+
+## download_url from 2022 Jan to 2026 Jul
+for year in range(2022, 2027):
+
+    if year == 2026:
+        year_month = 7
+    else:
+        year_month = 12
+
+    for month in range(1, year_month + 1):
+
+        #download address
+        file_name = f"On_Time_Reporting_Carrier_On_Time_Performance_1987_present_{year}_{month}.zip"
+        download_url = base_url + file_name
+
+        # save path
+        flight_folder = save_folder / "bts"
+        flight_folder.mkdir(parents=True, exist_ok=True)
+        save_path = save_folder / f"bts_{year}_{month}.zip"
+        save_temporary_path = save_folder / f"bts_{year}_{month}.part"
+
+        # download
+        print("Downloading：", year, month)
+
+        if save_path.exists():
+            print("Download complete：", year, month)
+            continue
+
+        else:
+            urlretrieve(download_url, save_temporary_path)
+            save_temporary_path.rename(save_path)
+
+        print("Download complete：", year, month)
+
+print("All months downloaded.")
+
+
+
+###############################################################################
+### Weather data download from 
+################################################################################
+
+## Set the base URL for the weather data download
+weather_url = "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?"
+
+# Boston Logan Station
+weather_url = weather_url + "station=BOS&network=MA_ASOS"
+
+# Choose the weather variables to download
+weather_url = weather_url + "&data=tmpf,relh,sknt,gust,vsby,skyc1"
+
+# Start & end time using UTC time zone
+weather_url = weather_url + "&sts=2022-01-01T05:00:00Z" + "&ets=2026-08-01T04:00:00Z" + "&tz=UTC"
+
+# Choose the report type; use cvs, keep missing values as M; no lat/lon columns
+weather_url = weather_url + "&report_type=3" + "&format=onlycomma&missing=M" + "&latlon=no&elev=no"
+
+
+
+## Download
+weather_folder = save_folder / "iem"
+weather_folder.mkdir(parents=True, exist_ok=True)
+weather_path = save_folder / "iem_BOS_2022_2026_07.csv"
+weather_temporary_path = save_folder / "iem_BOS_2022_2026_07.part"
+
+if weather_path.exists():
+    print("Download complete")
+
+else:
+    print("Downloading weather data...")
+
+    urlretrieve(weather_url, weather_temporary_path)
+    weather_temporary_path.rename(weather_path)
+
+    print("Download complete!")
